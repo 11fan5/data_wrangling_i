@@ -2,7 +2,7 @@
 title: "Data Wrangling"
 author: "Yifan Shi"
 date: "2024-09-17"
-output: html_document
+output: github_document
 ---
 
 ```{r setup, echo = FALSE, message = FALSE}
@@ -10,4 +10,76 @@ library(tidyverse)
 
 ```
 
+
 This document will show how to import data
+
+## Import the FAS Litters CSV
+
+```{r}
+litters_df = read_csv("data_import_examples/FAS_litters.csv")
+
+litters_df = janitor::clean_names(litters_df)
+```
+not attaching the whole janitor package at the beginning because we are only using the clean_names function here 
+clean_name fucntion convert everything to lower case, separated by _ 
+
+## Look at the dataset
+```{r}
+litters_df
+
+head(litters_df)
+tail(litters_df, 10)
+```
+
+```{r eval = FALSE}
+view(litters_df)
+```
+
+## Import the FAS pups CSV
+
+Use reletive path
+```{r}
+pups_df = read_csv("data_import_examples/FAS_pups.csv")
+
+pups_df = janitor::clean_names(pups_df)
+```
+
+Use absolute path
+
+coln names and skipping 
+```{r}
+litters_df=
+  read_csv(
+    file="data_import_examples/FAS_litters.csv",
+    skip=2
+  )
+```
+
+## Look at the dataset
+```{r}
+pups_df
+
+head(pups_df)
+tail(pups_df, 10)
+```
+
+```{r eval = FALSE}
+view(pups_df)
+```
+
+
+
+What about missing data
+
+```{r}
+litters_df=
+  read_csv(
+    file="data_import_examples/FAS_litters.csv",
+    na = c("NA", " ", ".")
+  )
+
+litters_df = janitor::clean_names(litters_df)
+pull(litters_df, gd0_weight)
+```
+
+
